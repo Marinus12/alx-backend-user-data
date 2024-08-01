@@ -3,6 +3,7 @@
 
 import bcrypt
 
+
 def hash_password(password: str) -> bytes:
     """
     Hash a password with a random salt.
@@ -17,6 +18,7 @@ def hash_password(password: str) -> bytes:
     hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed
 
+
 def is_valid(hashed_password: bytes, password: str) -> bool:
     """
     Check if a password matches the hashed password.
@@ -26,6 +28,6 @@ def is_valid(hashed_password: bytes, password: str) -> bool:
         password (str): The password to check.
 
     Returns:
-        bool: True if the password matches the hashed password, False otherwise.
+        bool: True if the password matches the hashed password, else False.
     """
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
