@@ -35,7 +35,7 @@ class BasicAuth(Auth):
         return authorization_header[6:]
 
     def decode_base64_authorization_header(
-         self, base64_authorization_header: Optional[str]
+        self, base64_authorization_header: Optional[str]
     ) -> Optional[str]:
         """
         Decode a Base64 string and return the UTF-8 decoded value.
@@ -74,23 +74,21 @@ class BasicAuth(Auth):
         return email, password
 
     def user_object_from_credentials(
-    self, user_email: Optional[str], user_pwd: Optional[str]
-) -> Optional[UserType]:
-    """
-    Retrieve a User instance based on email and password.
-    Args:
-        user_email (Optional[str]): The email of the user.
-        user_pwd (Optional[str]): The password of the user.
-    Returns:
-        Optional[UserType]: The User instance if valid, otherwise None.
-    """
-    if not isinstance(user_email, str) or not isinstance(user_pwd, str):
-        return None
-    # Use a dictionary to search for users by email
-    users = User.search({"email": user_email})
-    if not users:
-        return None
-    # Check the password of the first user found
-    if not users[0].is_valid_password(user_pwd):
-        return None
-    return users[0]
+        self, user_email: Optional[str], user_pwd: Optional[str]
+    ) -> Optional[UserType]:
+        """
+        Retrieve a User instance based on email and password.
+        Args:
+            user_email (Optional[str]): The email of the user.
+            user_pwd (Optional[str]): The password of the user.
+        Returns:
+            Optional[UserType]: The User instance if valid, otherwise None.
+        """
+        if not isinstance(user_email, str) or not isinstance(user_pwd, str):
+            return None
+        users = User.search({"email": user_email})
+        if not users:
+            return None
+        if not users[0].is_valid_password(user_pwd):
+            return None
+        return users[0]
