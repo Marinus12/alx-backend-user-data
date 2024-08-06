@@ -11,6 +11,7 @@ from models.user import User
 # Define a TypeVar for the User instance
 UserType = TypeVar('UserType', bound=User)
 
+
 class BasicAuth(Auth):
     """
     Basic authentication class that inherits from Auth.
