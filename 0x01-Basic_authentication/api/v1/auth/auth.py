@@ -8,7 +8,6 @@ from flask import request
 
 class Auth:
     """Class to manage API authentication"""
-    
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Method to check if authentication is required """
         if path is None:
@@ -17,7 +16,8 @@ class Auth:
             return True
         path = path if path.endswith('/') else path + '/'
         for excluded_path in excluded_paths:
-            excluded_path = excluded_path if excluded_path.endswith('/') else excluded_path + '/'
+            excluded_path = (excluded_path + '/' if not
+                             excluded_path.endswith('/') else excluded_path)
             if path.startswith(excluded_path):
                 return False
         return True
