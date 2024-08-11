@@ -1,4 +1,4 @@
-#!/use/bin/env python3
+#!/usr/bin/env python3
 """A session authentication class"""
 import uuid
 from api.v1.auth.auth import Auth
@@ -28,10 +28,9 @@ class SessionAuth(Auth):
     def user_id_for_session_id(self, session_id: str = None) -> str:
         """
         Returns the user ID associated with a given session ID.
-
         Args:
-            session_id (str): The session ID for which the user ID is to be retrieved.
-
+            session_id (str): The session ID for which the user ID
+            is to be retrieved.
         Returns:
             str: The user ID associated with the session ID,
             or None if not found.
@@ -56,7 +55,7 @@ class SessionAuth(Auth):
             return None
         return User.get(user_id)
 
-     def destroy_session(self, request=None):
+    def destroy_session(self, request=None):
         """Deletes the user session / logout"""
         if request is None:
             return False
